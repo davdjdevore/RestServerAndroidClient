@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>ObjDetailScreenGenerator.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6897bb;}
+.s4 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ObjDetailScreenGenerator.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.homework2</span>
+
+<span class="s1">import android.content.Context</span>
+<span class="s1">import android.graphics.Color</span>
+<span class="s1">import android.util.TypedValue</span>
+<span class="s1">import android.view.Gravity</span>
+<span class="s1">import android.view.ViewGroup</span>
+<span class="s1">import android.widget.Button</span>
+<span class="s1">import android.widget.LinearLayout</span>
+<span class="s1">import android.widget.TextView</span>
+
+
+<span class="s0">class </span><span class="s1">ObjDetailScreenGenerator(</span><span class="s0">val </span><span class="s1">ctx : Context) {</span>
+    <span class="s2">// 1. Create a linearlayout object</span>
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">layoutObj : LinearLayout</span>
+    <span class="s0">fun </span><span class="s1">generate() : LinearLayout {</span>
+        <span class="s1">layoutObj = LinearLayout(ctx)</span>
+        <span class="s0">val </span><span class="s1">lParams = ViewGroup.LayoutParams(</span>
+                <span class="s1">ViewGroup.LayoutParams.MATCH_PARENT</span><span class="s0">,</span>
+                <span class="s1">ViewGroup.LayoutParams.MATCH_PARENT</span>
+        <span class="s1">)</span>
+        <span class="s1">layoutObj.layoutParams = lParams</span>
+        <span class="s1">layoutObj.orientation = LinearLayout.VERTICAL</span>
+        <span class="s1">layoutObj.setBackgroundColor(Color.RED)</span>
+
+
+        <span class="s2">// title</span>
+        <span class="s0">var </span><span class="s1">title = TextView(ctx)</span>
+        <span class="s0">var </span><span class="s1">tParams = LinearLayout.LayoutParams(</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span><span class="s0">,</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span>
+        <span class="s1">)</span>
+        <span class="s0">val </span><span class="s1">npx :Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP</span><span class="s0">, </span><span class="s3">40F</span><span class="s0">, </span><span class="s1">ctx.getResources().getDisplayMetrics()).toInt()</span>
+        <span class="s1">tParams.topMargin = npx</span>
+        <span class="s1">tParams.bottomMargin = npx</span>
+        <span class="s1">tParams.gravity = Gravity.CENTER</span>
+
+
+        <span class="s1">title.text = </span><span class="s4">&quot;Please Enter Claim Information&quot;</span>
+        <span class="s1">title.setTextSize(TypedValue.COMPLEX_UNIT_SP</span><span class="s0">, </span><span class="s3">20F</span><span class="s1">)</span>
+
+
+        <span class="s1">layoutObj.addView(title</span><span class="s0">,</span><span class="s1">tParams)</span>
+
+        <span class="s2">// 2. Add objdetail section</span>
+        <span class="s0">val </span><span class="s1">fldRowGenerator = ObjDetailSectionGenerator(ctx)</span>
+        <span class="s0">val </span><span class="s1">colView = fldRowGenerator.generate()</span>
+        <span class="s1">layoutObj.addView(colView)</span>
+
+        <span class="s2">// 3. Add next button LinearLayout</span>
+        <span class="s0">val </span><span class="s1">nLayout = LinearLayout(ctx)</span>
+        <span class="s0">val </span><span class="s1">nParams = LinearLayout.LayoutParams(</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span><span class="s0">,</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span>
+        <span class="s1">)</span>
+        <span class="s2">// only applies to hight</span>
+        <span class="s1">nParams.gravity = Gravity.RIGHT</span>
+        <span class="s2">//nParams.weight = 0.0F</span>
+
+        <span class="s1">nLayout.layoutParams = nParams</span>
+        <span class="s1">nLayout.orientation = LinearLayout.HORIZONTAL</span>
+        <span class="s1">nLayout.setBackgroundColor(Color.GRAY)</span>
+        <span class="s2">//</span>
+        <span class="s0">val </span><span class="s1">nButton = Button(ctx)</span>
+        <span class="s1">nButton.text = </span><span class="s4">&quot;Add&quot;</span>
+        <span class="s1">nButton.setId(R.id.add)</span>
+        <span class="s1">nButton.setBackgroundColor(Color.CYAN)</span>
+        <span class="s0">val </span><span class="s1">nbParams = LinearLayout.LayoutParams(</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span><span class="s0">,</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span>
+        <span class="s1">)</span>
+
+        <span class="s1">nbParams.gravity = Gravity.END</span>
+        <span class="s1">nLayout.addView(nButton</span><span class="s0">, </span><span class="s1">nbParams)</span>
+        <span class="s2">//</span>
+        <span class="s1">layoutObj.addView(nLayout)</span>
+
+
+        <span class="s2">// Status</span>
+        <span class="s0">val </span><span class="s1">status = statusCheck(ctx)</span>
+        <span class="s0">val </span><span class="s1">sCheck = status.generate()</span>
+        <span class="s1">layoutObj.addView(sCheck)</span>
+
+        <span class="s0">return </span><span class="s1">layoutObj</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>MainActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.homework2</span>
+
+<span class="s1">import android.content.Intent</span>
+<span class="s1">import android.graphics.Color</span>
+<span class="s1">import androidx.appcompat.app.AppCompatActivity</span>
+<span class="s1">import android.os.Bundle</span>
+<span class="s1">import android.util.Log</span>
+<span class="s1">import android.view.ViewGroup</span>
+<span class="s1">import android.widget.Button</span>
+<span class="s1">import android.widget.EditText</span>
+<span class="s1">import android.widget.LinearLayout</span>
+<span class="s1">import android.widget.ListView</span>
+<span class="s1">import java.time.temporal.TemporalAdjusters.next</span>
+
+<span class="s0">class </span><span class="s1">MainActivity : AppCompatActivity() {</span>
+
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">root : LinearLayout</span>
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">summaryView : ListView</span>
+
+    <span class="s1">override </span><span class="s0">fun </span><span class="s1">onCreate(savedInstanceState: Bundle?) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span>
+
+        <span class="s1">root = LinearLayout(</span><span class="s0">this</span><span class="s1">)</span>
+        <span class="s0">val </span><span class="s1">lParams = ViewGroup.LayoutParams(</span>
+                <span class="s1">ViewGroup.LayoutParams.MATCH_PARENT</span><span class="s0">,</span>
+                <span class="s1">ViewGroup.LayoutParams.MATCH_PARENT</span>
+        <span class="s1">)</span>
+        <span class="s1">root.layoutParams = lParams</span>
+        <span class="s1">root.orientation = LinearLayout.VERTICAL</span>
+        <span class="s1">root.setBackgroundColor(Color.MAGENTA)</span>
+        <span class="s2">//</span>
+        <span class="s1">summaryView = ListView(</span><span class="s0">this</span><span class="s1">)</span>
+        <span class="s0">val </span><span class="s1">nbParams = LinearLayout.LayoutParams(</span>
+                <span class="s1">ViewGroup.LayoutParams.MATCH_PARENT</span><span class="s0">,</span>
+                <span class="s1">ViewGroup.LayoutParams.MATCH_PARENT</span>
+        <span class="s1">)</span>
+        <span class="s1">summaryView.setBackgroundColor(Color.YELLOW)</span>
+        <span class="s1">root.addView(summaryView</span><span class="s0">, </span><span class="s1">nbParams)</span>
+
+
+        <span class="s0">val </span><span class="s1">fldRowGenerator = ObjDetailScreenGenerator(</span><span class="s0">this</span><span class="s1">)</span>
+        <span class="s1">root = fldRowGenerator.generate()</span>
+        <span class="s1">setContentView(root)</span>
+
+        <span class="s2">// add button listener</span>
+        <span class="s0">val </span><span class="s1">bView : Button = findViewById(R.id.add)</span>
+        <span class="s2">//val ct = EditText(findViewById(R.id.claim_title)).toString()</span>
+       <span class="s2">//val d = EditText(findViewById(R.id.date)).toString()</span>
+
+        <span class="s1">bView.setOnClickListener{</span>
+       <span class="s2">//     ClaimService(this).add(ct, d)</span>
+            <span class="s1">Log.d(</span><span class="s3">&quot;add button&quot;</span><span class="s0">, </span><span class="s3">&quot;was clicked. &quot;</span><span class="s1">)</span>
+
+            <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+
+<span class="s1">}</span></pre>
+</body>
+</html>

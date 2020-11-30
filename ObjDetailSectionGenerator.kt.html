@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>ObjDetailSectionGenerator.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ObjDetailSectionGenerator.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.homework2</span>
+
+<span class="s1">import android.content.Context</span>
+<span class="s1">import android.graphics.Color</span>
+<span class="s1">import android.view.ViewGroup</span>
+<span class="s1">import android.widget.LinearLayout</span>
+
+<span class="s0">class </span><span class="s1">ObjDetailSectionGenerator(</span><span class="s0">val </span><span class="s1">ctx : Context) {</span>
+
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">layoutObj : LinearLayout</span>
+
+    <span class="s0">fun </span><span class="s1">generate() : LinearLayout {</span>
+        <span class="s1">layoutObj = LinearLayout(ctx)</span>
+        <span class="s0">val </span><span class="s1">lParams = ViewGroup.LayoutParams(</span>
+                <span class="s1">ViewGroup.LayoutParams.MATCH_PARENT</span><span class="s0">,</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT)</span>
+        <span class="s1">layoutObj.layoutParams = lParams</span>
+        <span class="s1">layoutObj.orientation = LinearLayout.HORIZONTAL</span>
+        <span class="s1">layoutObj.setBackgroundColor(Color.WHITE)</span>
+        <span class="s2">//</span>
+        <span class="s0">val </span><span class="s1">lcParams = LinearLayout.LayoutParams(</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span><span class="s0">,</span>
+                <span class="s1">ViewGroup.LayoutParams.MATCH_PARENT)</span>
+        <span class="s0">val </span><span class="s1">colGenerator = LableColumnGenerator(ctx)</span>
+        <span class="s0">var </span><span class="s1">lblView = colGenerator.generate()</span>
+        <span class="s1">lcParams.weight = </span><span class="s3">1.0F</span>
+        <span class="s1">layoutObj.addView(lblView</span><span class="s0">, </span><span class="s1">lcParams)</span>
+
+        <span class="s0">val </span><span class="s1">valGenerator = ValueColumnGenerator(ctx)</span>
+        <span class="s0">val </span><span class="s1">vcParams = LinearLayout.LayoutParams(</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span><span class="s0">,</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT)</span>
+        <span class="s1">lblView = valGenerator.generate()</span>
+        <span class="s1">vcParams.marginStart = </span><span class="s3">5</span>
+        <span class="s1">vcParams.weight = </span><span class="s3">3.0F</span>
+        <span class="s1">layoutObj.addView(lblView</span><span class="s0">, </span><span class="s1">vcParams)</span>
+        <span class="s0">return </span><span class="s1">layoutObj</span>
+        <span class="s0">return </span><span class="s1">layoutObj</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

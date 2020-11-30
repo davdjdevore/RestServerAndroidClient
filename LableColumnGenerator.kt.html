@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>LableColumnGenerator.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+LableColumnGenerator.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.homework2</span>
+
+<span class="s1">import android.content.Context</span>
+<span class="s1">import android.graphics.Color</span>
+<span class="s1">import android.util.TypedValue</span>
+<span class="s1">import android.view.Gravity</span>
+<span class="s1">import android.view.ViewGroup</span>
+<span class="s1">import android.widget.LinearLayout</span>
+<span class="s1">import android.widget.TextView</span>
+
+<span class="s0">class </span><span class="s1">LableColumnGenerator(</span><span class="s0">val </span><span class="s1">ctx : Context) {</span>
+
+    <span class="s0">fun </span><span class="s1">generate() : LinearLayout {</span>
+        <span class="s0">val </span><span class="s1">layoutObj = LinearLayout(ctx)</span>
+        <span class="s0">val </span><span class="s1">lParams = ViewGroup.LayoutParams(</span>
+            <span class="s1">ViewGroup.LayoutParams.MATCH_PARENT</span><span class="s0">,</span>
+            <span class="s1">ViewGroup.LayoutParams.MATCH_PARENT)</span>
+        <span class="s1">layoutObj.layoutParams = lParams</span>
+        <span class="s1">layoutObj.orientation = LinearLayout.VERTICAL</span>
+        <span class="s1">layoutObj.setBackgroundColor(Color.RED)</span>
+
+
+
+        <span class="s0">val </span><span class="s1">lbParams = LinearLayout.LayoutParams(</span>
+            <span class="s1">ViewGroup.LayoutParams.MATCH_PARENT</span><span class="s0">,</span>
+            <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT)</span>
+
+        <span class="s1">lbParams.weight = </span><span class="s2">1.0F</span>
+        <span class="s1">lbParams.topMargin = </span><span class="s2">5</span>
+        <span class="s1">lbParams.marginStart = </span><span class="s2">100</span>
+
+        <span class="s0">var </span><span class="s1">lbl = TextView(ctx)</span>
+        <span class="s1">lbl = TextView(ctx)</span>
+        <span class="s1">lbl.text = </span><span class="s3">&quot;Claim Title&quot;</span>
+        <span class="s1">lbl.setTextSize(TypedValue.COMPLEX_UNIT_SP</span><span class="s0">, </span><span class="s2">20F</span><span class="s1">)</span>
+
+        <span class="s4">//lbl.setBackgroundColor(Color.YELLOW)</span>
+        <span class="s1">layoutObj.addView(lbl</span><span class="s0">, </span><span class="s1">lbParams)</span>
+
+        <span class="s1">lbl = TextView(ctx)</span>
+        <span class="s1">lbl.text = </span><span class="s3">&quot;Date&quot;</span>
+        <span class="s1">lbl.setTextSize(TypedValue.COMPLEX_UNIT_SP</span><span class="s0">, </span><span class="s2">20F</span><span class="s1">)</span>
+
+        <span class="s4">// lbl.setBackgroundColor(Color.YELLOW)</span>
+        <span class="s1">layoutObj.addView(lbl</span><span class="s0">, </span><span class="s1">lbParams)</span>
+
+        <span class="s0">return </span><span class="s1">layoutObj</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

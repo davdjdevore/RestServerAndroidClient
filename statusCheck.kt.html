@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>statusCheck.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6897bb;}
+.s4 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+statusCheck.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.homework2</span>
+
+<span class="s1">import android.content.Context</span>
+<span class="s1">import android.graphics.Color</span>
+<span class="s1">import android.util.TypedValue</span>
+<span class="s1">import android.view.Gravity</span>
+<span class="s1">import android.view.ViewGroup</span>
+<span class="s1">import android.widget.EditText</span>
+<span class="s1">import android.widget.LinearLayout</span>
+<span class="s1">import android.widget.TextView</span>
+
+<span class="s0">class </span><span class="s1">statusCheck(</span><span class="s0">val </span><span class="s1">ctx : Context) {</span>
+
+    <span class="s1">lateinit </span><span class="s0">var </span><span class="s1">layoutObj : LinearLayout</span>
+
+    <span class="s0">fun </span><span class="s1">generate() : LinearLayout {</span>
+
+        <span class="s1">layoutObj = LinearLayout(ctx)</span>
+        <span class="s0">val </span><span class="s1">lParams = ViewGroup.LayoutParams(</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span><span class="s0">,</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span>
+        <span class="s1">)</span>
+        <span class="s1">layoutObj.layoutParams = lParams</span>
+        <span class="s1">layoutObj.orientation = LinearLayout.HORIZONTAL</span>
+        <span class="s1">layoutObj.setBackgroundColor(Color.RED)</span>
+
+        <span class="s2">// Status</span>
+        <span class="s0">var </span><span class="s1">status = TextView(ctx)</span>
+        <span class="s0">var </span><span class="s1">sParams = LinearLayout.LayoutParams(</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span><span class="s0">,</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span>
+        <span class="s1">)</span>
+
+        <span class="s0">val </span><span class="s1">npx :Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP</span><span class="s0">, </span><span class="s3">40F</span><span class="s0">, </span><span class="s1">ctx.getResources().getDisplayMetrics()).toInt()</span>
+
+        <span class="s1">sParams.topMargin = npx</span>
+        <span class="s1">sParams.bottomMargin = npx</span>
+        <span class="s1">sParams.marginStart = </span><span class="s3">100</span>
+        <span class="s1">sParams.gravity = Gravity.LEFT</span>
+
+
+        <span class="s1">status.text = </span><span class="s4">&quot;Status&quot;</span>
+        <span class="s1">status.setTextSize(TypedValue.COMPLEX_UNIT_SP</span><span class="s0">, </span><span class="s3">20F</span><span class="s1">)</span>
+
+
+        <span class="s1">layoutObj.addView(status</span><span class="s0">,</span><span class="s1">sParams)</span>
+        <span class="s2">// status activity</span>
+        <span class="s0">val </span><span class="s1">saParams = LinearLayout.LayoutParams(</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT</span><span class="s0">,</span>
+                <span class="s1">ViewGroup.LayoutParams.WRAP_CONTENT)</span>
+        <span class="s1">saParams.marginStart = </span><span class="s3">200</span>
+
+        <span class="s0">val </span><span class="s1">value = EditText(ctx)</span>
+        <span class="s1">value.setHint(</span><span class="s4">&quot;&lt;status activity&gt;&quot;</span><span class="s1">)</span>
+        <span class="s1">value.setBackgroundColor(Color.RED)</span>
+        <span class="s1">layoutObj.addView(value</span><span class="s0">, </span><span class="s1">saParams)</span>
+
+
+        <span class="s0">return </span><span class="s1">layoutObj</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

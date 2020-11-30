@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>ClaimService.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #808080;}
+.s4 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ClaimService.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.homework2</span>
+
+<span class="s1">import android.util.Log</span>
+<span class="s1">import com.google.gson.Gson</span>
+<span class="s1">import com.google.gson.reflect.TypeToken</span>
+<span class="s1">import com.loopj.android.http.AsyncHttpClient</span>
+<span class="s1">import com.loopj.android.http.AsyncHttpResponseHandler</span>
+<span class="s1">import cz.msebera.android.httpclient.Header</span>
+<span class="s1">import cz.msebera.android.httpclient.entity.StringEntity</span>
+<span class="s1">import java.lang.reflect.Type</span>
+<span class="s1">import java.util.*</span>
+
+<span class="s0">class </span><span class="s1">ClaimService(</span><span class="s0">val </span><span class="s1">ctx : MainActivity) {</span>
+
+    <span class="s0">var </span><span class="s1">claimList : MutableList&lt;Claim&gt; = mutableListOf()</span>
+    <span class="s0">var </span><span class="s1">currentIndx : Int = </span><span class="s2">0</span>
+
+
+    <span class="s1">inner </span><span class="s0">class  </span><span class="s1">GetAllServiceREspHandler : AsyncHttpResponseHandler(){</span>
+        <span class="s1">override </span><span class="s0">fun </span><span class="s1">onSuccess(</span>
+                <span class="s1">statusCode: Int</span><span class="s0">,</span>
+                <span class="s1">headers: Array&lt;out Header&gt;?</span><span class="s0">,</span>
+                <span class="s1">responseBody: ByteArray?</span>
+        <span class="s1">) {</span>
+            <span class="s3">// JSON string</span>
+            <span class="s0">if </span><span class="s1">(responseBody != </span><span class="s0">null</span><span class="s1">) {</span>
+                <span class="s1">Log.d(</span><span class="s4">&quot;Person Service&quot;</span><span class="s0">, </span><span class="s4">&quot;The response JSON string is </span><span class="s0">${</span><span class="s1">String(responseBody)</span><span class="s0">}</span><span class="s4">&quot;</span><span class="s1">)</span>
+                <span class="s0">val </span><span class="s1">gson = Gson()</span>
+                <span class="s0">val </span><span class="s1">personListType: Type = </span><span class="s0">object </span><span class="s1">: TypeToken&lt;List&lt;Claim&gt;&gt;() {}.type</span>
+                <span class="s1">claimList = gson.fromJson(String(responseBody)</span><span class="s0">, </span><span class="s1">personListType)</span>
+                <span class="s3">//</span>
+              <span class="s3">//  if (ctx is MainActivity){</span>
+               <span class="s3">//     (ctx as MainActivity).refreshScreen()</span>
+               <span class="s3">// }</span>
+               <span class="s3">// else</span>
+               <span class="s3">//     ctx.refreshScreen(claimList[currentIndx])</span>
+
+
+                <span class="s3">//</span>
+                <span class="s3">//act.runOnUiThread {</span>
+                <span class="s3">//    cbLambdaFunction()</span>
+                <span class="s3">//}</span>
+                <span class="s1">Log.d(</span><span class="s4">&quot;Claim Service&quot;</span><span class="s0">, </span><span class="s4">&quot;The Claim List: </span><span class="s0">${</span><span class="s1">claimList</span><span class="s0">}</span><span class="s4">&quot;</span><span class="s1">)</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s1">override </span><span class="s0">fun </span><span class="s1">onFailure(</span>
+                <span class="s1">statusCode: Int</span><span class="s0">,</span>
+                <span class="s1">headers: Array&lt;out Header&gt;?</span><span class="s0">,</span>
+                <span class="s1">responseBody: ByteArray?</span><span class="s0">,</span>
+                <span class="s1">error: Throwable?</span>
+        <span class="s1">) {</span>
+            <span class="s1">TODO(</span><span class="s4">&quot;Not yet implemented&quot;</span><span class="s1">)</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+
+    <span class="s1">inner </span><span class="s0">class  </span><span class="s1">addServiceRespHandler : AsyncHttpResponseHandler() {</span>
+        <span class="s1">override </span><span class="s0">fun </span><span class="s1">onSuccess(</span>
+                <span class="s1">statusCode: Int</span><span class="s0">,</span>
+                <span class="s1">headers: Array&lt;out Header&gt;?</span><span class="s0">,</span>
+                <span class="s1">responseBody: ByteArray?</span>
+        <span class="s1">) {</span>
+            <span class="s0">if</span><span class="s1">(responseBody != </span><span class="s0">null</span><span class="s1">) {</span>
+                <span class="s0">val </span><span class="s1">respStr = String(responseBody)</span>
+                <span class="s1">Log.d(</span><span class="s4">&quot;Claim Service&quot;</span><span class="s0">, </span><span class="s4">&quot;The add Service response :</span><span class="s0">${</span><span class="s1">respStr</span><span class="s0">}</span><span class="s4">&quot;</span><span class="s1">)</span>
+            <span class="s1">}</span>
+
+        <span class="s1">}</span>
+
+        <span class="s1">override </span><span class="s0">fun </span><span class="s1">onFailure(</span>
+                <span class="s1">statusCode: Int</span><span class="s0">,</span>
+                <span class="s1">headers: Array&lt;out Header&gt;?</span><span class="s0">,</span>
+                <span class="s1">responseBody: ByteArray?</span><span class="s0">,</span>
+                <span class="s1">error: Throwable?</span>
+        <span class="s1">) {</span>
+            <span class="s1">TODO(</span><span class="s4">&quot;Not yet implemented&quot;</span><span class="s1">)</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s1">public </span><span class="s0">fun </span><span class="s1">add( title : String</span><span class="s0">, </span><span class="s1">date : String){</span>
+        <span class="s0">val </span><span class="s1">id = UUID.randomUUID()</span>
+        <span class="s0">val </span><span class="s1">isSolved = </span><span class="s4">&quot;false&quot;</span>
+        <span class="s1">claimList.add(Claim(id</span><span class="s0">, </span><span class="s1">title</span><span class="s0">, </span><span class="s1">date</span><span class="s0">, </span><span class="s1">isSolved.toBoolean()))</span>
+    <span class="s1">}</span>
+    <span class="s0">fun </span><span class="s1">addClaim(cObj : Claim) {</span>
+
+        <span class="s0">val </span><span class="s1">client = AsyncHttpClient()</span>
+        <span class="s0">val </span><span class="s1">requestUrl = </span><span class="s4">&quot;http://192.168.1.33:8010/ClaimService/add&quot;</span>
+
+        <span class="s3">// 1.Convert the pObj into JSON string</span>
+        <span class="s0">val </span><span class="s1">pJsonString = Gson().toJson(cObj)</span>
+        <span class="s3">// 2. Send the post request</span>
+        <span class="s0">val </span><span class="s1">entity = StringEntity(pJsonString)</span>
+
+        <span class="s3">// cxt is an Android Application Context object</span>
+        <span class="s1">client.post(ctx</span><span class="s0">, </span><span class="s1">requestUrl</span><span class="s0">, </span><span class="s1">entity</span><span class="s0">, </span><span class="s4">&quot;application/json&quot;</span><span class="s0">, </span><span class="s1">addServiceRespHandler())</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">fun </span><span class="s1">getAllClaims() : List&lt;Claim&gt; {</span>
+
+        <span class="s0">val </span><span class="s1">client = AsyncHttpClient()</span>
+        <span class="s0">val </span><span class="s1">requestUrl = </span><span class="s4">&quot;http://192.168.1.33:8010/ClaimService/getAll&quot;</span>
+
+        <span class="s1">Log.d(</span><span class="s4">&quot;Claim Service&quot;</span><span class="s0">, </span><span class="s4">&quot;The response JSON string is happening&quot;</span><span class="s1">)</span>
+
+        <span class="s1">client.get(requestUrl</span><span class="s0">, </span><span class="s1">GetAllServiceREspHandler() )</span>
+
+        <span class="s0">return </span><span class="s1">claimList</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>
